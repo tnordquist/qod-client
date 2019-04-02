@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class Quote {
 
-  @Expose
+  @Expose // Gson library (nothing to do with Room)
   private UUID id;
 
   @Expose
