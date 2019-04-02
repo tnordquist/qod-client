@@ -1,0 +1,59 @@
+package edu.cnm.deepdive.qod.service;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import edu.cnm.deepdive.android.BaseFluentAsyncTask;
+import edu.cnm.deepdive.qod.QodApplication;
+import edu.cnm.deepdive.qod.R;
+import edu.cnm.deepdive.qod.model.Quote;
+import java.io.IOException;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+
+public interface QodService {
+
+  @GET("quotes/random")
+  Call<Quote> get();
+
+  class InstanceHolder {
+
+    private static final QodService INSTANCE;
+
+    static {
+      QodApplication application = QodApplication.getInstance();
+      Gson gson = new GsonBuilder()
+          .excludeFieldsWithoutExposeAnnotation()
+          .create();
+      Retrofit retrofit = new Retrofit.Builder()
+          .baseUrl(application.getApplicationContext().getString(R.string.base_url))
+          .addConverterFactory(GsonConverterFactory.create(gson))
+          .build();
+      INSTANCE = retrofit.create(QodService.class);
+    }
+
+  }
+
+  class GetQodTask extends BaseFluentAsyncTask<Void, Void, Quote, Quote> {
+
+    private Quote quote;
+
+    @Override
+    protected Quote perform(Void... voids) throws TaskException {
+      try {
+        Response<Quote> response = InstanceHolder.INSTANCE.get().execute();
+        if (!response.isSuccessful()) {
+          throw new TaskException();
+        }
+        return response.body();
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    }
+
+  }
+
+
+}

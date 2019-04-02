@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/answer_background"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/colorPrimaryDark"
+  android:theme="@style/PaddedText"
+  tools:context=".controller.MainActivity">
+
+  <TextView
+    android:id="@+id/quote_text"
+    style="@style/TextAppearance.AppCompat.Large"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:textAlignment="textStart"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintWidth_percent="0.75"/>
+
+  <TextView
+    android:id="@+id/source_name"
+    style="@style/TextAppearance.AppCompat.Caption"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:textAlignment="textEnd"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/quote_text"
+    app:layout_constraintWidth_percent="0.75"/>
+
+</android.support.constraint.ConstraintLayout>
